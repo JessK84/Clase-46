@@ -69,13 +69,17 @@ describe("algoritmoDeLuhn(numbers)", () => {
     })
  
     
-    it("Debe mostrar un cartel de true o false si el número ingresado es válido", () => {
+    it("Debe mostrar devolver 'true' si el número ingresado es válido", () => {
         const number = "4517-6601-3066-7800"
         const numbers  = algoritmoDeLuhn(number)
+
+      expect(numbers).to.be.true // aserción
+    })
+
+    it("Debe mostrar devolver 'false' si el número ingresado es inválido", () => {
         const number1 = "4517-6601-3066-7809"
         const numbers1  = algoritmoDeLuhn(number1)
 
-      expect(numbers).to.be.true // aserción
       expect(numbers1).to.be.false // aserción
     })
 
@@ -83,37 +87,51 @@ describe("algoritmoDeLuhn(numbers)", () => {
 
 
 describe("verificadoraDeTarjeta(numeros)", () => {
-    it("Debe permitir ingresar un string y veriificar que sea un número válido de Luhn", () => {
+    it("Debe devolver 'true' si es un número válido según el algoritmo de Luhn", () => {
         const numero =  "4517-6601-3066-7800"
         const numeros  = algoritmoDeLuhn(numero)
+
+      expect(numeros).to.be.true // aserción
+
+    })
+
+    it("Debe devolver 'false' si el número no es válido según el algoritmo de Luhn", () => {
         const numero1 = "4517-6601-3066-7809"
         const numeros1  = algoritmoDeLuhn(numero1)
 
-      expect(numeros).to.be.true // aserción
       expect(numeros1).to.be.false // aserción
     })
 
-    it("Debe mostrar un cartel con el nombre de la tarjeta", () => {
+    it("Debe devolver 'Visa'", () => {
         const numero =  "4517-6601-3066-7800"
         const numeros  = verificadoraDeTarjeta(numero)
+
+      expect(numeros).to.have.string("Visa")
+
+    })
+
+    it("Debe devolver 'Mastercard'", () => {
         const numero1 = "5436-0383-6994-1607"
         const numeros1  = verificadoraDeTarjeta(numero1)
+    
+      expect(numeros1).to.have.string("Mastercard")
+ 
+    })
+    
+    it("Debe devolver 'AmericanExpress'", () => {
         const numero2 = "3777-910209-51538"
         const numeros2  = verificadoraDeTarjeta(numero2)
 
-      expect(numeros).to.eql("Visa")
-      expect(numeros1).to.eql("Mastercard")
-      expect(numeros2).to.eql("AmericanExpress")
+      
+      expect(numeros2).to.have.string("AmericanExpress")
     })
-    
-    it("Debe mostrar un cartel de 'Invalid' si el número ingresado no es correcto", () => {
+    it("Debe mostrar un cartel de error de: 'Invalid' si el número ingresado no es correcto", () => {
         const numero =  "4517-6503-3036-7800"
-        const numeros  = verificadoraDeTarjeta(numero)
-        const numero1 =  "4517-6601-3066"
-        const numeros1  = verificadoraDeTarjeta(numero1)
+        const fn = () =>{
+            verificadoraDeTarjeta(numero)
+        }
 
-      expect(numeros).to.eql("Invalid")
-      expect(numeros1).to.eql("Invalid")
+      expect(fn).to.throw("Invalid")
 
     })
 }) 

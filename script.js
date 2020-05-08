@@ -95,9 +95,10 @@ const verificadoraDeTarjeta = numeros => {
                     else if (numerosTarjeta[0]=== "4") {
                         return "Visa"
                 }
-            }        
-        }
-        return "Invalid" 
+            }     
+        } else {
+            throw new Error(`Invalid`)
+        }   
 }
 
 
